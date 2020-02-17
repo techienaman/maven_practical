@@ -24,7 +24,7 @@ public class EmployeeService {
 	
 	public List<Employee> fetchAllEmployees(){
 		List<Employee> employees = this.employeeDAO.getAll();
-		if (employees == null  || employees.isEmpty()) {
+		if (employees == null) {
 			throw new IllegalArgumentException("No employees");
 		}
 		return employees;

@@ -84,12 +84,14 @@ public class EmployeeServiceTest {
 		fail("Exception should be thrown");
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testInvalidEmptyEmployees() {
 		
 		Mockito.when(employeeDAO.getAll()).thenReturn(new ArrayList<Employee>());
 		
 		List<Employee> employees = employeeService.fetchAllEmployees();
-		fail("Exception should be thrown");
+		
+		assertNotNull(employees);
+		assertTrue(employees.isEmpty());
 	}
 }
