@@ -12,5 +12,9 @@ public class EmployeeDAO {
 	public void save(Employee employee) {
 		this.employees.add(employee);
 	}
+	
+	public List<Employee> getAll(){
+		return this.employees;
+	}
 
 }
