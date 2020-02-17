@@ -23,6 +23,10 @@ public class EmployeeService {
 	}
 	
 	public List<Employee> fetchAllEmployees(){
-		return this.employeeDAO.getAll();
+		List<Employee> employees = this.employeeDAO.getAll();
+		if (employees == null  || employees.isEmpty()) {
+			throw new IllegalArgumentException("No employees");
+		}
+		return employees;
 	}
 }

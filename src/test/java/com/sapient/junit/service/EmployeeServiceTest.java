@@ -2,6 +2,7 @@ package com.sapient.junit.service;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class EmployeeServiceTest {
 		MockitoAnnotations.initMocks(this);
 	}
 	
-	//@Test
+	@Test
 	public void saveEmployeeInvalidValues() {
 	
 		Employee employee = new Employee(14,"Akash", 25000);
@@ -43,14 +44,14 @@ public class EmployeeServiceTest {
 	}
 	
 	
-	//@Test(expected=IllegalArgumentException.class)
+	@Test(expected=IllegalArgumentException.class)
 	public void saveEmployeeInvalidValues1() {
 		Employee employee = new Employee(14,"Akash", 25000);
 		employeeService.saveEmployee(employee);
 		fail("SHould not execute this statement");
 	}
 	
-	//@Test
+	@Test
 	public void saveEmployeeValidValues() {
 	
 		Employee employee = new Employee(14,"Akash", 55000);
@@ -74,4 +75,21 @@ public class EmployeeServiceTest {
 		assertEquals(employees.size(),  3);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidNullEmployees() {
+		
+		Mockito.when(employeeDAO.getAll()).thenReturn(null);
+		
+		List<Employee> employees = employeeService.fetchAllEmployees();
+		fail("Exception should be thrown");
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidEmptyEmployees() {
+		
+		Mockito.when(employeeDAO.getAll()).thenReturn(new ArrayList<Employee>());
+		
+		List<Employee> employees = employeeService.fetchAllEmployees();
+		fail("Exception should be thrown");
+	}
 }
